@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: iris-
+spec:
+  entrypoint: train
+  templates:
+  - name: train
+    container:
+      image: eu.gcr.io/climate-poc-01/ml-train-iris:latest
+      command: [python]
+      args: ["train.py"]

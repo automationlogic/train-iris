@@ -7,6 +7,6 @@ spec:
   templates:
   - name: train
     container:
-      image: eu.gcr.io/climate-poc-01/ml-train-iris:latest
+      image: eu.gcr.io/${ANALYTICS_PROJECT}/train-iris:latest
       command: [python]
       args: ["train.py"]

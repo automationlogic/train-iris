@@ -19,8 +19,9 @@ steps:
   dir: /workspace/conf
 
 - name: 'eu.gcr.io/${PROJECT_ID}/kubeflow-tools'
-  args: /bin/sh
-    - -c
+  entrypoint: /bin/sh
+  args:
+    - '-c'
     - |
        bin/kfp.sh ${_KUBEFLOW_HOST} ${REPO_NAME} /workspace/conf/workflow.yaml
 

@@ -20,12 +20,13 @@ while(True):
     if run_status == "":
         run_status = "Pending"
 
-    print(f"Status : {run_status}")
+    print(f"Status : {run_status} ...", end=' ')
     if run_status == "Succeeded":
-        print(f"SUCCESS: For details go to https://{kubeflow_host}/#/runs/details/{run.id}")
+        print(f"\nSUCCESS: For details go to https://{kubeflow_host}/#/runs/details/{run.id}")
         break
     if run_status == "Failed" or run_status == "Error":
-        print(f"FAILURE: For details go to https://{kubeflow_host}/#/runs/details/{run.id}")
+        print(f"\nFAILURE: For details go to https://{kubeflow_host}/#/runs/details/{run.id}")
         exit(1)
 
+    print("sleeping for 5 seconds ...")
     time.sleep(5)

@@ -1,4 +1,4 @@
 google-cloud-storage
 joblib
 sklearn
-scikit-learn==0.22.2.post1
+scikit-learn==0.21.2

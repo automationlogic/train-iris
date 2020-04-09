@@ -1,12 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  entrypoint: /bin/sh
-  args:
-    - '-c'
-    - |
-       docker build -t eu.gcr.io/${_ANALYTICS_PROJECT}/${_IMAGE_NAME} \
-         --build-arg ML_MODELS_BUCKET=${_ML_MODELS_BUCKET} \
-         .
+  args: ['build', '-t', 'eu.gcr.io/${_ANALYTICS_PROJECT}/${_IMAGE_NAME}', '.']
   dir: /workspace/app
 
 - name: 'gcr.io/cloud-builders/docker'
@@ -17,7 +11,8 @@ steps:
   args:
     - '-c'
     - |
-       sed -e "s/\$$ANALYTICS_PROJECT/$_ANALYTICS_PROJECT/g" workflow.yaml.tmpl > workflow.yaml
+       sed -e "s/\$$ANALYTICS_PROJECT/$_ANALYTICS_PROJECT/g" \
+           -e "s/\$$ML_MODELS_BUCKET/$_ML_MODELS_BUCKET/g" workflow.yaml.tmpl > workflow.yaml
   dir: /workspace/conf
 
 - name: 'eu.gcr.io/${PROJECT_ID}/kubeflow-tools'

@@ -10,3 +10,6 @@ spec:
       image: eu.gcr.io/$ANALYTICS_PROJECT/train-iris:latest
       command: [python]
       args: ["train.py"]
+      env:
+      - name: ML_MODELS_BUCKET
+        value: $ML_MODELS_BUCKET

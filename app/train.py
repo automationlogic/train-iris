@@ -1,4 +1,4 @@
-from sklearn import svm
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn import datasets
 from joblib import dump
 from google.cloud import storage
@@ -43,7 +43,7 @@ model_name = f"iris_{datetime_now}.joblib.latest"
 bucket_prefix = 'iris'
 
 print("Training model ...")
-clf = svm.SVC(gamma='scale')
+clf = KNeighborsClassifier()
 iris = datasets.load_iris()
 X, y = iris.data, iris.target
 clf.fit(X, y)

@@ -24,7 +24,7 @@ while(True):
     if run_status == "Succeeded":
         print(f"SUCCESS: For details go to https://{kubeflow_host}/#/runs/details/{run.id}")
         break
-    if run_status == "Failed" or run_status == "Error"
+    if run_status == "Failed" or run_status == "Error":
         print(f"FAILURE: For details go to https://{kubeflow_host}/#/runs/details/{run.id}")
         exit(1)
 

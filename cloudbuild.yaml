@@ -20,7 +20,7 @@ steps:
        sed -e "s/\$$ANALYTICS_PROJECT/$_ANALYTICS_PROJECT/g" workflow.yaml.tmpl > workflow.yaml
   dir: /workspace/conf
 
-- name: 'gcr.io/google-appengine/python'
+- name: 'gcr.io/${PROJECT_ID}/kubeflow-tools'
   entrypoint: /bin/sh
   args:
     - '-c'

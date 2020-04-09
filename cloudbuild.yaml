@@ -26,7 +26,7 @@ steps:
     - '-c'
     - |
        pip3 install kfp kfp-server-api --upgrade
-       sh /workspace/bin/kfp.sh ${_KUBEFLOW_HOST} ${REPO_NAME} /workspace/conf/workflow.yaml
+       sh /workspace/bin/kfp_deploy.sh ${_KUBEFLOW_HOST} ${REPO_NAME} /workspace/conf/workflow.yaml
 
 substitutions:
   _IMAGE_NAME: train-iris

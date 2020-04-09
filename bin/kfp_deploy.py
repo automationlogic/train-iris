@@ -1,7 +1,7 @@
-import kfp
 import sys
 import datetime
 import time
+import kfp
 
 kubeflow_host = sys.argv[1]
 experiment_name = sys.argv[2]
@@ -28,4 +28,4 @@ while(True):
         print(f"FAILURE: For details go to https://{kubeflow_host}/#/runs/details/{run.id}")
         exit(1)
 
-	time.sleep(5)
+    time.sleep(5)

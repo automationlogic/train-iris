@@ -8,6 +8,7 @@ steps:
          --build-arg ML_MODELS_BUCKET=${_ML_MODELS_BUCKET} \
          .
   dir: /workspace/app
+
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'eu.gcr.io/${PROJECT_ID}/${_IMAGE_NAME}']
 
@@ -24,7 +25,7 @@ steps:
   args:
     - '-c'
     - |
-       pip3 install -r requirements.txt
+       pip3 install kfp kfp-server-api --upgrade
        sh /workspace/bin/kfp.sh ${_KUBEFLOW_HOST} ${REPO_NAME} /workspace/conf/workflow.yaml
 
 substitutions:

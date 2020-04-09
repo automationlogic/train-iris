@@ -3,6 +3,7 @@ from sklearn import datasets
 from joblib import dump
 from google.cloud import storage
 
+import os
 import datetime
 
 def upload_blob(bucket_name, source_file_name, destination_blob_name):

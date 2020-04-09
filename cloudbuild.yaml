@@ -25,7 +25,7 @@ steps:
   args:
     - '-c'
     - |
-       sh /workspace/bin/kfp_deploy.sh ${_KUBEFLOW_HOST} ${REPO_NAME} /workspace/conf/workflow.yaml
+       sh /workspace/bin/kfp_deploy.sh ${_KUBEFLOW_HOST} "${REPO_NAME}-$SHORT_SHA" /workspace/conf/workflow.yaml
 
 substitutions:
   _IMAGE_NAME: train-iris

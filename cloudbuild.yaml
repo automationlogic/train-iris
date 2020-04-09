@@ -7,6 +7,7 @@ steps:
        docker build -t eu.gcr.io/${PROJECT_ID}/${_IMAGE_NAME} \
          --build-arg ML_MODELS_BUCKET=${_ML_MODELS_BUCKET} \
          .
+  dir: /workspace/app
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'eu.gcr.io/${PROJECT_ID}/${_IMAGE_NAME}']
 
@@ -18,11 +19,12 @@ steps:
        sed -e "s/\$$ANALYTICS_PROJECT/$_ANALYTICS_PROJECT/g" workflow.yaml.tmpl > workflow.yaml
   dir: /workspace/conf
 
-- name: 'eu.gcr.io/${PROJECT_ID}/kubeflow-tools'
+- name: 'gcr.io/google-appengine/python'
   entrypoint: /bin/sh
   args:
     - '-c'
     - |
+       pip3 install -r requirements.txt
        sh /workspace/bin/kfp.sh ${_KUBEFLOW_HOST} ${REPO_NAME} /workspace/conf/workflow.yaml
 
 substitutions:

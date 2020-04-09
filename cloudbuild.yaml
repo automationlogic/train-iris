@@ -10,7 +10,7 @@ steps:
   dir: /workspace/app
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'eu.gcr.io/${PROJECT_ID}/${_IMAGE_NAME}']
+  args: ['push', 'eu.gcr.io/${_ANALYTICS_PROJECT}/${_IMAGE_NAME}']
 
 - name: 'gcr.io/cloud-builders/docker'
   entrypoint: /bin/sh
@@ -25,9 +25,8 @@ steps:
   args:
     - '-c'
     - |
-       pip3 install kfp kfp-server-api --upgrade
        sh /workspace/bin/kfp_deploy.sh ${_KUBEFLOW_HOST} ${REPO_NAME} /workspace/conf/workflow.yaml
 
 substitutions:
   _IMAGE_NAME: train-iris
-  _ML_MODELS_BUCKET: climate-analytics-ml-models
+  _ML_MODELS_BUCKET: ${PROJECT_ID}-models

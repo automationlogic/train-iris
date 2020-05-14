@@ -1,2 +1,2 @@
-# train-iris
-Climate Analytics - Train on Iris data
+# Trai Iris
+Train on Iris data

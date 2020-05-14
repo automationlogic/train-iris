@@ -2,6 +2,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn import datasets
 from joblib import dump
 from google.cloud import storage
+from google.cloud import bigquery
 
 import os
 import datetime
@@ -35,6 +36,24 @@ def list_blobs(bucket_name, prefix):
 
     return blobs
 
+# Fetching data
+
+print("Fetching data from BigQuery ...")
+client = bigquery.Client()
+
+query = (
+    "SELECT * FROM `" + os.environ['PROJECT_ID'] + ".iris.iris`"
+)
+query_job = client.query(
+    query,
+)
+
+iris_features = []
+iris_names = []
+for row in query_job:
+    iris_features.append([row.Sepal_Length,row.Sepal_Width,row.Petal_Length,row.Petal_Width])
+    iris_names.append(row.Flower_Type)
+
 # Training
 
 bucket_name = os.environ['ML_MODELS_BUCKET']
@@ -44,8 +63,7 @@ bucket_prefix = 'iris'
 
 print("Training model ...")
 clf = KNeighborsClassifier()
-iris = datasets.load_iris()
-X, y = iris.data, iris.target
+X, y = iris_features, iris_names
 clf.fit(X, y)
 dump(clf, model_name)
 
